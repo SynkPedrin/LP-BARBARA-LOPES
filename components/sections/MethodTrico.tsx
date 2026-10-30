@@ -116,32 +116,43 @@ export function MethodTrico() {
         </div>
 
         {/* Lista de etapas (mobile e desktop) */}
-        <ol ref={stepsRef} className="relative space-y-5 lg:col-span-7 lg:space-y-8">
-          <span aria-hidden="true" className="absolute bottom-6 left-[1.4rem] top-6 w-px bg-champagne lg:hidden" />
-          {method.steps.map((step, index) => (
-            <li key={step.number} data-step={index} className={`relative pl-14 lg:flex lg:min-h-[58vh] lg:items-center lg:pl-0`}>
-              <span
-                aria-hidden="true"
-                className="absolute left-0 top-8 flex size-[2.8rem] items-center justify-center rounded-full border border-gold/60 bg-ivory font-serif text-lg text-brown lg:hidden"
+        <div className="relative lg:col-span-7">
+          {/* Linha de progresso da timeline no mobile */}
+          <span aria-hidden="true" className="absolute bottom-6 left-[1.4rem] top-6 w-px bg-champagne lg:hidden">
+            <m.span className="absolute inset-0 origin-top bg-gold" style={{ scaleY: progress }} />
+          </span>
+          <ol ref={stepsRef} className="relative space-y-5 lg:space-y-8">
+            {method.steps.map((step, index) => (
+              <li
+                key={step.number}
+                data-step={index}
+                className={`relative pl-14 lg:flex lg:min-h-[58vh] lg:items-center lg:pl-0`}
               >
-                {step.number}
-              </span>
-              <article
-                data-reveal
-                className={`w-full rounded-lg border border-champagne/80 p-7 shadow-[var(--shadow-soft)] transition-[box-shadow,border-color] duration-700 sm:p-10 lg:p-14 ${
-                  index % 2 === 0 ? "bg-white" : "bg-ivory"
-                } ${index === active ? "lg:border-gold/50 lg:shadow-[var(--shadow-lift)]" : ""}`}
-              >
-                <p className="eyebrow text-taupe">Etapa {step.number}</p>
-                <h3 className="mt-4 font-serif text-[2.4rem] font-light leading-none text-espresso sm:text-5xl lg:text-6xl">
-                  {step.title}
-                </h3>
-                <span aria-hidden="true" className="mt-6 block h-px w-12 bg-gold" />
-                <p className="mt-6 max-w-lg text-[0.9375rem] leading-[1.75] text-warmgray sm:text-base">{step.text}</p>
-              </article>
-            </li>
-          ))}
-        </ol>
+                <span
+                  aria-hidden="true"
+                  className={`absolute left-0 top-8 flex size-[2.8rem] items-center justify-center rounded-full border font-serif text-lg transition-[background-color,color,border-color,transform] duration-700 ease-[var(--ease-editorial)] lg:hidden ${
+                    index <= active ? "scale-110 border-gold bg-gold text-espresso" : "border-gold/60 bg-ivory text-brown"
+                  }`}
+                >
+                  {step.number}
+                </span>
+                <article
+                  data-reveal
+                  className={`w-full rounded-lg border border-champagne/80 p-7 shadow-[var(--shadow-soft)] transition-[box-shadow,border-color] duration-700 sm:p-10 lg:p-14 ${
+                    index % 2 === 0 ? "bg-white" : "bg-ivory"
+                  } ${index === active ? "border-gold/50 shadow-[var(--shadow-lift)]" : ""}`}
+                >
+                  <p className="eyebrow text-taupe">Etapa {step.number}</p>
+                  <h3 className="mt-4 font-serif text-[2.4rem] font-light leading-none text-espresso sm:text-5xl lg:text-6xl">
+                    {step.title}
+                  </h3>
+                  <span aria-hidden="true" className="mt-6 block h-px w-12 bg-gold" />
+                  <p className="mt-6 max-w-lg text-[0.9375rem] leading-[1.75] text-warmgray sm:text-base">{step.text}</p>
+                </article>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
 
       {/* Encerramento */}

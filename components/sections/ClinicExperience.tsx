@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { m, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, m, useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
 import { ClinicFilm } from "@/components/remotion/ClinicFilm";
 import { RevealTitle } from "@/components/ui/RevealTitle";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { ctaLabels, experience } from "@/lib/content";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 const sidePanels = [
   {
@@ -100,6 +102,34 @@ export function ClinicExperience() {
             <span aria-hidden="true" className="absolute -inset-3 rounded-[10px] border border-gold/25 sm:-inset-4" />
             <ClinicFilm onChapterChange={setChapter} />
           </div>
+          {/* Capítulo atual (mobile e tablet) */}
+          <div className="mx-auto mt-8 flex max-w-[26rem] items-center gap-4 lg:hidden" aria-hidden="true">
+            <span className="font-serif text-lg text-gold">{String(chapter + 1).padStart(2, "0")}</span>
+            <span className="relative h-5 flex-1 overflow-hidden">
+              <AnimatePresence mode="popLayout" initial={false}>
+                <m.span
+                  key={chapter}
+                  className="absolute inset-0 text-[0.6875rem] font-semibold uppercase leading-5 tracking-[0.24em] text-ivory"
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: "-100%", opacity: 0, transition: { duration: 0.3, ease: EASE } }}
+                  transition={{ duration: 0.6, ease: EASE }}
+                >
+                  {experience.chapters[chapter]}
+                </m.span>
+              </AnimatePresence>
+            </span>
+            <span className="flex gap-1.5">
+              {experience.chapters.map((name, index) => (
+                <span
+                  key={name}
+                  className={`h-px transition-all duration-700 ease-[var(--ease-editorial)] ${
+                    index === chapter ? "w-6 bg-gold" : index < chapter ? "w-3 bg-champagne/60" : "w-3 bg-champagne/20"
+                  }`}
+                />
+              ))}
+            </span>
+          </div>
           <p className="mt-6 text-center text-xs text-champagne/55">
             Imagens reais do Instituto Bárbara Lopes. Reprodução sem áudio.
           </p>
@@ -121,7 +151,20 @@ export function ClinicExperience() {
         </div>
       </div>
 
-      <div className="container-editorial relative mt-12 lg:hidden">
+      {/* Painéis com imagens reais (mobile e tablet), com o mesmo parallax sutil */}
+      <div className="container-editorial relative mt-14 grid grid-cols-2 gap-4 lg:hidden">
+        {sidePanels.map((panel, index) => (
+          <m.figure
+            key={panel.src}
+            style={{ y: index === 0 ? panelUp : panelDown }}
+            className={`relative aspect-[464/700] overflow-hidden rounded-[4px] ring-1 ring-champagne/15 ${index === 1 ? "mt-10" : ""}`}
+          >
+            <Image src={panel.src} alt={panel.alt} fill sizes="45vw" className="object-cover opacity-90" />
+          </m.figure>
+        ))}
+      </div>
+
+      <div className="container-editorial relative mt-16 lg:hidden">
         <WhatsAppCTA label={ctaLabels.consultation} location="experience" variant="light" className="w-full sm:w-auto" />
       </div>
     </section>

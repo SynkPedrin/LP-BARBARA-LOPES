@@ -36,7 +36,7 @@ function CategoryCard({ category, index }: { category: TechnologyCategory; index
       <h3 className="mt-8 font-serif text-[1.9rem] leading-[1.1] text-espresso">{category.title}</h3>
       <span
         aria-hidden="true"
-        className="mt-5 block h-px w-10 bg-gold transition-[width] duration-700 ease-[var(--ease-editorial)] group-hover:w-16"
+        className="mt-5 block h-px w-10 bg-gold transition-[width] duration-700 ease-[var(--ease-editorial)] group-hover:w-16 max-lg:delay-500 max-lg:group-[.is-visible]:w-16"
       />
       <p className="mt-5 text-[0.9375rem] leading-[1.7] text-warmgray">{category.intro}</p>
 

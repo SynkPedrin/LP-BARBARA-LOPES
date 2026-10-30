@@ -1,5 +1,6 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { MapPin } from "lucide-react";
+import { preload } from "react-dom";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { ctaLabels, hero } from "@/lib/content";
 
@@ -13,7 +14,45 @@ const titleLines = [
   </em>,
 ];
 
+const PHOTO_ALT = "Dra. Bárbara Lopes, biomédica esteta e tricologista, sentada em uma poltrona clara no Instituto Bárbara Lopes";
+const DESKTOP_QUERY = "(min-width: 1024px)";
+const DESKTOP_SIZES = "(min-width: 1792px) 56vw, (min-width: 1280px) 60vw, 57vw";
+
+// Direção de arte: retrato vertical no mobile/tablet; fotografia horizontal no desktop
+const desktopPhoto = getImageProps({
+  src: "/assets/barbara/dra-barbara-lopes.png",
+  alt: PHOTO_ALT,
+  width: 1672,
+  height: 941,
+  sizes: DESKTOP_SIZES,
+}).props;
+const mobilePhoto = getImageProps({
+  src: "/assets/barbara/dra-barbara-lopes-retrato.png",
+  alt: PHOTO_ALT,
+  width: 1024,
+  height: 1536,
+  sizes: "100vw",
+  fetchPriority: "high",
+  loading: "eager",
+}).props;
+
 export function Hero() {
+  // Cada viewport baixa apenas a sua versão (asset do LCP)
+  preload(mobilePhoto.src, {
+    as: "image",
+    imageSrcSet: mobilePhoto.srcSet,
+    imageSizes: mobilePhoto.sizes,
+    fetchPriority: "high",
+    media: "(max-width: 1023.98px)",
+  });
+  preload(desktopPhoto.src, {
+    as: "image",
+    imageSrcSet: desktopPhoto.srcSet,
+    imageSizes: desktopPhoto.sizes,
+    fetchPriority: "high",
+    media: DESKTOP_QUERY,
+  });
+
   return (
     <section
       id="inicio"
@@ -23,15 +62,14 @@ export function Hero() {
       {/* Fotografia original da Dra. Bárbara: no mobile é um bloco no topo; no desktop ocupa a metade direita */}
       <div className="relative h-[clamp(20rem,47svh,34rem)] overflow-hidden sm:h-[clamp(24rem,52svh,38rem)] lg:absolute lg:inset-y-0 lg:right-0 lg:top-[var(--header-height)] lg:h-auto lg:w-[57%] xl:w-[60%] 3xl:w-[56%]">
         <div className="hero-photo absolute inset-0 will-change-transform">
-          <Image
-            src="/assets/barbara/dra-barbara-lopes.png"
-            alt="Dra. Bárbara Lopes, biomédica esteta e tricologista, sentada em uma poltrona clara no Instituto Bárbara Lopes"
-            fill
-            preload
-            fetchPriority="high"
-            sizes="(min-width: 1792px) 56vw, (min-width: 1280px) 60vw, (min-width: 1024px) 57vw, 100vw"
-            className="object-cover object-[60%_16%] lg:object-[60%_28%]"
-          />
+          <picture>
+            <source media={DESKTOP_QUERY} srcSet={desktopPhoto.srcSet} sizes={desktopPhoto.sizes} />
+            {/* eslint-disable-next-line jsx-a11y/alt-text -- alt vem de getImageProps */}
+            <img
+              {...mobilePhoto}
+              className="absolute inset-0 size-full object-cover object-[50%_12%] lg:object-[60%_28%]"
+            />
+          </picture>
         </div>
         {/* Transições suaves para o marfim (não alteram a fotografia, apenas a borda da composição) */}
         <div

@@ -49,8 +49,8 @@ export const siteConfig = {
   },
 
   contact: {
-    /** PENDENTE: número oficial ainda não fornecido. Somente dígitos, com DDI e DDD. */
-    whatsapp: env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER)?.replace(/\D/g, "") || null,
+    /** WhatsApp oficial (+55 18 98827-0018). Pode ser substituído por NEXT_PUBLIC_WHATSAPP_NUMBER. */
+    whatsapp: (env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER) ?? "5518988270018").replace(/\D/g, "") || null,
     whatsappMessage:
       "Olá, Dra. Bárbara! Conheci o Instituto pelo site e gostaria de informações para agendar uma avaliação capilar.",
     /** PENDENTE: perfil oficial ainda não fornecido. */

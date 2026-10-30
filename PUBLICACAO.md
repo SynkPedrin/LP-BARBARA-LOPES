@@ -5,8 +5,8 @@ Variáveis de ambiente: ver `.env.example` (configurar também no painel da Verc
 
 ## Bloqueantes para divulgar o site
 
-- [ ] **WhatsApp oficial** → `NEXT_PUBLIC_WHATSAPP_NUMBER` (somente dígitos, com DDI e DDD, ex.: 5518XXXXXXXXX).
-      Enquanto vazio, todos os botões de agendamento levam à seção de Contato. Nenhum link quebrado é publicado.
+- [x] **WhatsApp oficial**: +55 18 98827-0018, configurado em `lib/site-config.ts` (pode ser sobrescrito por `NEXT_PUBLIC_WHATSAPP_NUMBER`).
+      Todos os botões de agendamento abrem o WhatsApp com a mensagem pré-preenchida.
 - [ ] **Registro profissional (CRBM)** validado → `NEXT_PUBLIC_PROFESSIONAL_REGISTRATION`.
       Aparece no rodapé, na seção "Sobre" e como responsável técnica apenas quando preenchido.
 - [ ] **Domínio definitivo** → `NEXT_PUBLIC_SITE_URL` (canonical, sitemap, Open Graph e Schema.org).
