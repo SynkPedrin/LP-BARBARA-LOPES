@@ -1,0 +1,363 @@
+@import "tailwindcss";
+
+/* ───────────────── Design tokens ───────────────── */
+@theme {
+  --color-ivory: #faf8f4;
+  --color-white: #ffffff;
+  --color-champagne: #e8dcc9;
+  --color-sand: #f3ece1;
+  --color-gold: #d2b477;
+  --color-taupe: #9b8066;
+  --color-brown: #624333;
+  --color-espresso: #30231d;
+  --color-espresso-deep: #241a15;
+  --color-warmgray: #756f69;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-manrope), "Manrope", system-ui, sans-serif;
+  --font-script: var(--font-allura), "Allura", cursive;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --shadow-soft: 0 1px 2px rgb(48 35 29 / 0.04), 0 12px 40px -12px rgb(98 67 51 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(48 35 29 / 0.05), 0 24px 60px -20px rgb(98 67 51 / 0.22);
+
+  --breakpoint-xs: 25rem;
+  --breakpoint-3xl: 112rem;
+}
+
+:root {
+  --header-height: 4rem;
+  --gutter: clamp(1.25rem, 4.5vw, 4.5rem);
+  color-scheme: light;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 5rem;
+  }
+}
+
+/* ───────────────── Base ───────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-champagne);
+    color: var(--color-espresso);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--color-brown);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ───────────────── Componentes utilitários ───────────────── */
+@utility container-editorial {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@utility paper-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.38 0 0 0 0 0.26 0 0 0 0 0.2 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@utility gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold) 18%, var(--color-gold) 82%, transparent);
+}
+
+/* ───────────────── Botões ───────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  flex-shrink: 0;
+  max-width: 100%;
+  min-height: 3.25rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 300ms var(--ease-soft),
+    background-color 300ms var(--ease-soft),
+    border-color 300ms var(--ease-soft),
+    box-shadow 400ms var(--ease-editorial),
+    transform 300ms var(--ease-editorial);
+}
+
+/* Linha dourada que percorre a base do botão no hover */
+@media (min-width: 640px) {
+  .btn {
+    padding: 0.5rem 1.75rem;
+  }
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 600ms var(--ease-editorial);
+  z-index: 1;
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.btn .btn-icon {
+  transition: transform 400ms var(--ease-editorial);
+}
+
+.btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--color-espresso);
+  color: var(--color-ivory);
+  box-shadow: 0 10px 30px -14px rgb(48 35 29 / 0.55);
+}
+
+.btn-primary:hover {
+  background: var(--color-brown);
+  box-shadow: 0 16px 40px -16px rgb(98 67 51 / 0.6);
+}
+
+.btn-light {
+  background: var(--color-ivory);
+  color: var(--color-espresso);
+}
+
+.btn-light:hover {
+  background: var(--color-champagne);
+}
+
+.btn-outline {
+  border: 1px solid rgb(98 67 51 / 0.35);
+  color: var(--color-brown);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-brown);
+  background: rgb(232 220 201 / 0.35);
+}
+
+.btn-outline-light {
+  border: 1px solid rgb(232 220 201 / 0.4);
+  color: var(--color-champagne);
+  background: transparent;
+}
+
+.btn-outline-light:hover {
+  border-color: var(--color-champagne);
+  background: rgb(232 220 201 / 0.08);
+}
+
+.btn.btn-sm {
+  min-height: 2.625rem;
+  padding: 0 1.125rem;
+  white-space: nowrap;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+}
+
+/* Link editorial com sublinhado dourado */
+.link-editorial {
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 500ms var(--ease-editorial), color 300ms var(--ease-soft);
+}
+
+.link-editorial:hover,
+.link-editorial:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* ───────────────── Reveal on scroll ─────────────────
+   O conteúdo só é escondido quando o JS sinaliza que está pronto (classe .js no <html>).
+   Se os scripts falharem, um timeout no <head> adiciona .reveal-fallback e tudo aparece. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 900ms var(--ease-editorial),
+    transform 1100ms var(--ease-editorial);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+.js [data-reveal="fade"] {
+  transform: none;
+}
+
+/* A máscara fica nos filhos: o IntersectionObserver ignora alvos totalmente recortados por clip-path */
+.js [data-reveal="mask"] {
+  opacity: 1;
+  transform: none;
+}
+
+.js [data-reveal="mask"] > * {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1300ms var(--ease-editorial);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+.js [data-reveal="mask"].is-visible > *,
+.reveal-fallback [data-reveal="mask"] > * {
+  clip-path: inset(0 0 0 0);
+}
+
+.js [data-reveal="line"] {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1400ms var(--ease-editorial);
+  transition-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+.js [data-reveal].is-visible,
+.reveal-fallback [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Títulos por linha: cada linha sobe dentro de uma máscara */
+.js [data-reveal-lines] .line-inner {
+  display: inline-block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform 1100ms var(--ease-editorial);
+  transition-delay: calc(var(--line-index, 0) * 110ms + var(--reveal-delay, 0) * 1ms);
+}
+
+.js [data-reveal-lines].is-visible .line-inner,
+.reveal-fallback [data-reveal-lines] .line-inner {
+  transform: none;
+}
+
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* ───────────────── Entrada do hero (CSS puro: funciona sem JS e não atrasa o LCP) ───────────────── */
+@keyframes hero-photo {
+  from { opacity: 0.25; transform: scale(1.06); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hero-line {
+  from { transform: translate3d(0, 108%, 0); }
+  to { transform: none; }
+}
+
+@keyframes hero-mask {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.hero-photo { animation: hero-photo 1800ms var(--ease-editorial) 100ms both; }
+.hero-eyebrow { animation: hero-rise 800ms var(--ease-editorial) 350ms both; }
+.hero-line { animation: hero-line 1000ms var(--ease-editorial) both; animation-delay: calc(500ms + var(--line-index, 0) * 120ms); }
+.hero-sub { animation: hero-rise 900ms var(--ease-editorial) 1000ms both; }
+.hero-cta { animation: hero-rise 900ms var(--ease-editorial) 1200ms both; }
+.hero-gold { animation: hero-mask 1200ms var(--ease-editorial) 1300ms both; }
+.hero-meta { animation: hero-rise 900ms var(--ease-editorial) 1450ms both; }
+
+/* ───────────────── Movimento reduzido ───────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .js [data-reveal],
+  .js [data-reveal-lines] .line-inner {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-reveal="mask"] > * {
+    clip-path: none;
+  }
+}
+
+/* Esconde o CTA fixo enquanto o menu mobile estiver aberto */
+[data-menu="open"] .mobile-cta-bar {
+  display: none;
+}
