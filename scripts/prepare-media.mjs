@@ -18,7 +18,7 @@ const ffmpeg = (args) =>
 
 // Originais preservados (cópia byte a byte)
 copyFileSync(join(SRC, "FUNDO-BARBARAA.png"), join(OUT, "dra-barbara-lopes.png"));
-copyFileSync(join(SRC, "RETRATO-DRA-BARBARA.png"), join(OUT, "dra-barbara-lopes-retrato.png"));
+copyFileSync(join(SRC, "Dra. barbara, qualidade.png"), join(OUT, "dra-barbara-lopes-retrato.png"));
 copyFileSync(join(SRC, "logo.png"), join(OUT, "logo-instituto-barbara-lopes.png"));
 
 // Logo: apenas recortes do arquivo original (sem redesenho, sem reamostragem)
