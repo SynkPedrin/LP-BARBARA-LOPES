@@ -96,7 +96,7 @@ export function ClinicExperience() {
 
         {/* Filme (Remotion Player) */}
         <div className="lg:col-span-4 lg:col-start-6">
-          <div className="relative mx-auto w-full max-w-[26rem]" data-reveal="fade">
+          <div className="relative mx-auto w-full max-w-[26rem]" data-reveal="fade" data-hide-mobile-cta>
             <span aria-hidden="true" className="absolute -inset-3 rounded-[10px] border border-gold/25 sm:-inset-4" />
             <ClinicFilm onChapterChange={setChapter} />
           </div>

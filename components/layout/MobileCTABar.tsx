@@ -7,7 +7,7 @@ import { ctaLabels } from "@/lib/content";
 
 /**
  * CTA fixo inferior no mobile. Aparece depois que o CTA do hero sai da tela
- * e se esconde quando o CTA final ou o rodapé estão visíveis, para não duplicar nem cobrir conteúdo.
+ * e se esconde quando o CTA final, o rodapé ou o filme (controles do player) estão visíveis.
  */
 export function MobileCTABar() {
   const [pastHero, setPastHero] = useState(false);
@@ -15,9 +15,11 @@ export function MobileCTABar() {
 
   useEffect(() => {
     const hero = document.getElementById("inicio");
-    const end = [document.getElementById("agendar"), document.querySelector("footer")].filter((el): el is HTMLElement =>
-      Boolean(el),
-    );
+    const end = [
+      document.getElementById("agendar"),
+      document.querySelector("footer"),
+      ...document.querySelectorAll("[data-hide-mobile-cta]"),
+    ].filter((el): el is HTMLElement => Boolean(el));
     const visibleEnds = new Set<Element>();
 
     const heroObserver = new IntersectionObserver(([entry]) => setPastHero(!entry?.isIntersecting), {
