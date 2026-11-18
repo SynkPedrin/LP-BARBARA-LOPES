@@ -18,20 +18,23 @@ const PHOTO_ALT = "Dra. Bárbara Lopes, biomédica esteta e tricologista, sentad
 const DESKTOP_QUERY = "(min-width: 1024px)";
 const DESKTOP_SIZES = "(min-width: 1792px) 56vw, (min-width: 1280px) 60vw, 57vw";
 
-// Direção de arte: retrato vertical no mobile/tablet; fotografia horizontal no desktop
+// Direção de arte: retrato vertical no mobile/tablet; fotografia horizontal no desktop.
+// Versões 4K obtidas por super-resolução (EDSR ×4) a partir dos originais da cliente: scripts/upscale-edsr.py
 const desktopPhoto = getImageProps({
-  src: "/assets/barbara/dra-barbara-lopes.png",
+  src: "/assets/barbara/dra-barbara-lopes-4k.jpg",
   alt: PHOTO_ALT,
-  width: 1672,
-  height: 941,
+  width: 3840,
+  height: 2161,
   sizes: DESKTOP_SIZES,
+  quality: 90,
 }).props;
 const mobilePhoto = getImageProps({
-  src: "/assets/barbara/dra-barbara-lopes-retrato.png",
+  src: "/assets/barbara/dra-barbara-lopes-retrato-4k.jpg",
   alt: PHOTO_ALT,
-  width: 1024,
-  height: 1536,
+  width: 2560,
+  height: 3840,
   sizes: "100vw",
+  quality: 90,
   fetchPriority: "high",
   loading: "eager",
 }).props;
