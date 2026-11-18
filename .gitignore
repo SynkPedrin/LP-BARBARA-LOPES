@@ -9,3 +9,7 @@ next-env.d.ts
 npm-debug.log*
 .env*
 !.env.example
+
+# Originais brutos do iPhone (HEIC/MOV): contêm GPS e são pesados; as versões web ficam em public/assets/barbara/fotos
+assets/*.HEIC
+assets/*.MOV

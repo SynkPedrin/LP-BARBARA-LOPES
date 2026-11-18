@@ -8,6 +8,7 @@ export const nav = [
   { label: "Início", href: "#inicio" },
   { label: "Método Trico", href: "#metodo-trico" },
   { label: "Tecnologias", href: "#tecnologias" },
+  { label: "Noivos", href: "#noivos" },
   { label: "Sobre a Dra.", href: "#sobre" },
   { label: "Nosso Espaço", href: "#espaco" },
   { label: "Contato", href: "#contato" },
@@ -21,6 +22,9 @@ export const ctaLabels = {
   conversation: "Conversar sobre uma avaliação",
   consultation: "Agendar uma consulta",
   about: "Agendar avaliação com a Dra. Bárbara",
+  results: "Quero começar meu tratamento",
+  homecare: "Quero meu protocolo de home care",
+  bridal: "Quero me preparar para o casamento",
 } as const;
 
 export const hero = {
@@ -92,6 +96,90 @@ export const method = {
   ],
   closingLead: "Não existe uma única resposta para todos os cabelos.",
   closingHighlight: "Existe uma avaliação para cada pessoa.",
+} as const;
+
+export const results = {
+  eyebrow: "Resultados em 90 dias",
+  text: "Com avaliação individualizada, plano de cuidado personalizado e acompanhamento próximo, o tratamento pelo Método Trico apresenta resultado expressivo em 90 dias na saúde do couro cabeludo e dos fios.",
+  milestones: [
+    {
+      day: "Dia 1",
+      title: "Avaliação",
+      text: "Tricoscopia digital, escuta do histórico e definição do seu plano de tratamento.",
+    },
+    {
+      day: "30 dias",
+      title: "Rotina estabelecida",
+      text: "Tratamento em consultório em andamento e protocolo de home care incorporado ao dia a dia.",
+    },
+    {
+      day: "60 dias",
+      title: "Reavaliação",
+      text: "Acompanhamento da evolução e ajustes de conduta conforme a resposta do seu organismo.",
+    },
+    {
+      day: "90 dias",
+      title: "Resultado expressivo",
+      text: "Nova tricoscopia e comparação com o início para registrar a evolução do tratamento.",
+    },
+  ],
+  note: "A resposta varia de acordo com cada organismo, com o diagnóstico e com a adesão ao tratamento e ao home care.",
+} as const;
+
+export const homeCare = {
+  eyebrow: "Home care e hair care",
+  text: "O tratamento não termina no consultório. O couro cabeludo é pele viva e responde ao cuidado de todos os dias. Por isso, cada paciente recebe um protocolo de home care e hair care personalizado, que sustenta e potencializa os resultados entre as sessões.",
+  pillars: [
+    {
+      title: "Home care",
+      subtitle: "Cuidado do couro cabeludo",
+      text: "Higienização correta, produtos específicos e a frequência adequada para o seu tipo de couro cabeludo: oleoso, sensível, com descamação ou com queda.",
+    },
+    {
+      title: "Hair care",
+      subtitle: "Cuidado dos fios",
+      text: "Hidratação, proteção e escolhas de rotina, como secador, química e penteados, que preservam a saúde e a força do cabelo.",
+    },
+    {
+      title: "Sob medida",
+      subtitle: "Revisado a cada etapa",
+      text: "Produtos e orientações indicados para você, sem fórmula genérica, e ajustados a cada reavaliação.",
+    },
+  ],
+  quote: "O resultado do consultório se sustenta na rotina de casa.",
+} as const;
+
+export const bridal = {
+  eyebrow: "Noivos e noivas",
+  text: "Um tratamento pensado para quem vai se casar e quer chegar ao grande dia com o couro cabeludo saudável e os fios no seu melhor momento, nas fotos, no penteado e em cada detalhe da celebração.",
+  items: [
+    { title: "Plano até a data do casamento", text: "Cronograma personalizado a partir da data da cerimônia." },
+    { title: "Para ela e para ele", text: "Tratamento individual para noivas, para noivos ou para o casal." },
+    { title: "Couro cabeludo em equilíbrio", text: "Cuidado com queda, afinamento, oleosidade e sensibilidade." },
+    { title: "Home care para a rotina dos noivos", text: "Orientações práticas para manter o cuidado em casa até o grande dia." },
+  ],
+  tip: "Recomendamos começar pelo menos 90 dias antes do casamento.",
+  whatsappMessage:
+    "Olá, Dra. Bárbara! Vou me casar e gostaria de informações sobre o tratamento capilar para noivos e noivas.",
+} as const;
+
+export const gallery = {
+  eyebrow: "Galeria",
+  text: "Conheça cada ambiente do Instituto Bárbara Lopes, da recepção com vista para Araçatuba às salas de atendimento.",
+  tourAlt: "Tour em vídeo pela recepção e pelos ambientes do Instituto Bárbara Lopes",
+  photos: [
+    { src: "recepcao-vista", alt: "Recepção em madeira com janela panorâmica e vista para Araçatuba" },
+    { src: "poltrona-arco", alt: "Poltrona clara diante de parede curva com iluminação indireta e quadro em tons terrosos" },
+    { src: "sala-de-espera", alt: "Sala de espera com poltronas em bouclê, piso de mármore e recepção ao fundo" },
+    { src: "sala-de-atendimento", alt: "Sala de atendimento com maca, bancada e iluminação suave" },
+    { src: "sala-de-espera-recepcao", alt: "Vista da sala de espera para a recepção e as janelas do Instituto" },
+    { src: "bancada-certificados", alt: "Prateleiras douradas com certificados da Dra. Bárbara Lopes sobre a bancada" },
+    { src: "sala-de-atendimento-detalhe", alt: "Maca de atendimento e bancada da sala de procedimentos" },
+    { src: "poltrona-atendimento", alt: "Poltrona de atendimento com mesa de apoio dourada" },
+    { src: "detalhe-acolhimento", alt: "Detalhe de acolhimento com mimos e plaquinha de Outubro Rosa" },
+    { src: "bancada-certificados-3", alt: "Bancada da sala de atendimento com prateleiras, certificados e produtos" },
+    { src: "bancada-certificados-2", alt: "Bancada clara com prateleiras douradas e certificados emoldurados" },
+  ],
 } as const;
 
 export type TechnologyItem = {
@@ -268,13 +356,19 @@ export const faq = {
       id: "cuidados-em-casa",
       question: "O acompanhamento inclui cuidados para fazer em casa?",
       answer:
-        "Quando indicado, podem ser orientados cuidados domiciliares e produtos específicos conforme as necessidades do couro cabeludo.",
+        "Sim. Todo couro cabeludo precisa de home care: cada paciente recebe orientações de home care e hair care, com produtos específicos para as necessidades do seu couro cabeludo e dos seus fios.",
     },
     {
       id: "prazo",
       question: "Em quanto tempo os resultados aparecem?",
       answer:
-        "A evolução depende de fatores individuais, das condições avaliadas e das condutas indicadas. Não existe um prazo único ou resultado garantido para todos os pacientes.",
+        "O tratamento pelo Método Trico apresenta resultado expressivo em 90 dias. A resposta de cada pessoa varia de acordo com o organismo, o diagnóstico e a adesão ao tratamento e ao home care.",
+    },
+    {
+      id: "noivos",
+      question: "Vou me casar. Quando devo começar o tratamento?",
+      answer:
+        "O ideal é começar pelo menos 90 dias antes da data do casamento. Assim há tempo para avaliar, tratar e chegar ao grande dia com o couro cabeludo saudável e os fios no seu melhor momento. O tratamento é indicado para noivas e para noivos.",
     },
     {
       id: "agendamento",

@@ -17,11 +17,12 @@ export function AboutBarbara() {
             <span aria-hidden="true" className="absolute -inset-3 rounded-t-full border border-gold/50 sm:-inset-4" />
             <figure className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-champagne" data-reveal="mask">
               <Image
-                src="/assets/barbara/dra-barbara-lopes-retrato.png"
-                alt="Retrato da Dra. Bárbara Lopes em seu consultório"
+                src="/assets/barbara/fotos/dra-barbara-lopes-jaleco.jpg"
+                alt="Retrato da Dra. Bárbara Lopes, de jaleco branco, em seu consultório"
                 fill
+                quality={90}
                 sizes="(min-width: 1024px) 34vw, (min-width: 640px) 30rem, 90vw"
-                className="object-cover object-[50%_18%]"
+                className="object-cover object-[50%_22%]"
               />
             </figure>
             <p className="mt-8 text-center font-script text-[2.6rem] leading-none text-brown" aria-hidden="true">

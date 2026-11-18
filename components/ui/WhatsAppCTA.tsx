@@ -16,6 +16,8 @@ type WhatsAppCTAProps = {
   size?: "md" | "sm";
   className?: string;
   showIcon?: boolean;
+  /** Mensagem pré-preenchida específica (padrão: mensagem geral de agendamento). */
+  message?: string;
 };
 
 /**
@@ -30,8 +32,9 @@ export function WhatsAppCTA({
   size = "md",
   className = "",
   showIcon = true,
+  message,
 }: WhatsAppCTAProps) {
-  const href = getBookingHref();
+  const href = getBookingHref(message);
 
   const handleClick = () => {
     if (event) trackEvent(event, { location });

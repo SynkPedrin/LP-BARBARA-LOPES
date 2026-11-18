@@ -23,6 +23,7 @@ npm run lint
 npm run typecheck
 npm run remotion:studio  # abre o filme ClinicExperienceFilm no Remotion Studio
 npm run media:prepare    # regenera as mídias otimizadas a partir de /assets
+npm run media:photos     # fotos HEIC do iPhone → JPEG 4K (3840 px) sem metadados + tour em vídeo 4K/1080p (macOS)
 ```
 
 ## Estrutura
@@ -30,8 +31,8 @@ npm run media:prepare    # regenera as mídias otimizadas a partir de /assets
 ```
 app/                      layout (SEO, fontes, JSON-LD), página, política de privacidade, sitemap, robots, ícones
 components/layout/        Header, Footer, MobileCTABar
-components/sections/      Hero, Concerns, MethodTrico, Technologies, ClinicExperience, AboutBarbara,
-                          ClinicalFollowUp, FAQ, Location, FinalCTA
+components/sections/      Hero, Concerns, MethodTrico, Results90, Technologies, HomeCare, Bridal, ClinicExperience,
+                          Gallery, AboutBarbara, ClinicalFollowUp, FAQ, Location, FinalCTA
 components/remotion/      ClinicExperienceFilm (composição), film-config (roteiro), ClinicFilmStage (Player), ClinicFilm (carregamento e controles)
 components/ui/            WhatsAppCTA, RevealTitle, GoldRule, RevealObserver, MotionProvider, PendingNotice
 components/analytics/     scripts opcionais com consentimento (GA4, GTM, Meta Pixel)

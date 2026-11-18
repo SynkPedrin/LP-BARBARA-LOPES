@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [360, 414, 640, 750, 828, 1080, 1280, 1536, 1920],
+    // Até 3840 px para servir as fotografias em 4K em telas grandes e de alta densidade
+    deviceSizes: [360, 414, 640, 750, 828, 1080, 1280, 1536, 1920, 2560, 3840],
+    qualities: [75, 90],
   },
   async headers() {
     return [

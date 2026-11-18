@@ -22,7 +22,10 @@ Variáveis de ambiente: ver `.env.example` (configurar também no painel da Verc
 - [ ] **Afirmações que exigem comprovação documental** (não publicadas):
       "única professora na região de Araçatuba" e "maior academia de tricologia do mundo".
 - [ ] **Frase editorial** da seção Acompanhamento ("Cuidar do cabelo também é cuidar de como você se sente ao longo do caminho.") e microtextos de apoio dos blocos: aprovação de tom.
-- [ ] **Programa de acompanhamento de 90 dias**: se existir, descrever como período de acompanhamento/reavaliação, nunca como prazo de resultado.
+- [ ] **"Resultado expressivo em 90 dias"** (seção Resultados, FAQ e Noivos), publicado a pedido da cliente, com a ressalva
+      de que a resposta varia por organismo, diagnóstico e adesão. Confirmar com a responsável técnica que a afirmação está
+      de acordo com as normas de publicidade do conselho profissional (vedação a promessa ou garantia de resultado).
+- [ ] **Tratamento para noivos e noivas** e **home care / hair care**: validar a copy em `lib/content.ts` (`bridal`, `homeCare`).
 
 ## Jurídico e LGPD
 

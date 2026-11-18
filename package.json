@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "remotion:studio": "remotion studio remotion/index.ts",
-    "media:prepare": "node scripts/prepare-media.mjs"
+    "media:prepare": "node scripts/prepare-media.mjs",
+    "media:photos": "node scripts/prepare-photos.mjs"
   },
   "dependencies": {
     "@remotion/player": "4.0.539",

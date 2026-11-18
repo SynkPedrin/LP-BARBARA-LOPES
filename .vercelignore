@@ -1,0 +1,5 @@
+# Originais brutos da cliente (HEIC/MOV/PNG): as versões web ficam em public/assets
+/assets
+.next
+node_modules
+.env*.local

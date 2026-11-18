@@ -70,10 +70,10 @@ export const siteConfig = {
 export const hasAnalytics = Boolean(siteConfig.analytics.gaId || siteConfig.analytics.gtmId || siteConfig.analytics.metaPixelId);
 
 /** Link de agendamento: WhatsApp quando configurado; caso contrário, a seção de contato. */
-export function getBookingHref() {
-  const { whatsapp, whatsappMessage } = siteConfig.contact;
+export function getBookingHref(message: string = siteConfig.contact.whatsappMessage) {
+  const { whatsapp } = siteConfig.contact;
   if (!whatsapp) return siteConfig.contactAnchor;
-  return `https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+  return `https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
 export const isWhatsAppConfigured = Boolean(siteConfig.contact.whatsapp);
