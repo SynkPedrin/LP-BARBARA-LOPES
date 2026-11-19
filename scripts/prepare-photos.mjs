@@ -30,6 +30,7 @@ export const photos = [
   ["IMG_8311.HEIC", "bancada-home-care"],
   ["IMG_8312.HEIC", "bancada-certificados-3"],
   ["IMG_8313.HEIC", "poltrona-atendimento"],
+  ["foto. dra hero.HEIC", "dra-barbara-lopes-hero"],
 ];
 
 mkdirSync(OUT, { recursive: true });
@@ -52,6 +53,14 @@ try {
 } finally {
   rmSync(tmp, { recursive: true, force: true });
 }
+
+// Imagem de compartilhamento (Open Graph, 1200×630) a partir da foto do hero: rosto e busto centralizados
+await sharp(join(OUT, "dra-barbara-lopes-hero.jpg"))
+  .extract({ left: 0, top: 1000, width: 2880, height: 1512 })
+  .resize(1200, 630)
+  .jpeg({ quality: 85, mozjpeg: true })
+  .toFile("public/assets/barbara/og-instituto-barbara-lopes.jpg");
+console.log("✓ og-instituto-barbara-lopes.jpg");
 
 // Vídeo de tour
 const ffmpeg = (args) =>

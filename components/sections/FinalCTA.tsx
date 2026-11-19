@@ -27,7 +27,7 @@ export function FinalCTA() {
 
       <div className="container-editorial relative flex flex-col items-center text-center">
         <p className="eyebrow text-gold" data-reveal="fade">
-          Agende sua avaliação
+          Agende sua consulta
         </p>
         <GoldRule className="mt-8 w-24" delay={150} />
         <RevealTitle

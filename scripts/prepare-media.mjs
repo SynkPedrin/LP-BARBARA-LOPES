@@ -17,8 +17,6 @@ const ffmpeg = (args) =>
   });
 
 // Originais preservados (cópia byte a byte)
-copyFileSync(join(SRC, "FUNDO-BARBARAA.png"), join(OUT, "dra-barbara-lopes.png"));
-copyFileSync(join(SRC, "Dra. barbara, qualidade.png"), join(OUT, "dra-barbara-lopes-retrato.png"));
 copyFileSync(join(SRC, "logo.png"), join(OUT, "logo-instituto-barbara-lopes.png"));
 
 // Logo: apenas recortes do arquivo original (sem redesenho, sem reamostragem)
@@ -29,12 +27,7 @@ ffmpeg(["-i", logo, "-vf", "crop=778:752:246:65", join(OUT, "logo-monograma.png"
 ffmpeg(["-i", logo, "-vf", "crop=760:760:254:60,scale=512:512:flags=lanczos", "app/icon.png"]);
 ffmpeg(["-i", logo, "-vf", "crop=760:760:254:60,scale=180:180:flags=lanczos", "app/apple-icon.png"]);
 
-// Imagem de compartilhamento (Open Graph) a partir da fotografia original, sem retoque
-ffmpeg([
-  "-i", join(SRC, "FUNDO-BARBARAA.png"),
-  "-vf", "scale=1200:-2:flags=lanczos,crop=1200:630:0:12",
-  "-q:v", "3", join(OUT, "og-instituto-barbara-lopes.jpg"),
-]);
+// A imagem de compartilhamento (Open Graph) é gerada em scripts/prepare-photos.mjs, a partir da foto do hero.
 
 // Vídeos verticais (464×832): sem trilha de áudio, faststart, sem upscale.
 const videos = [

@@ -14,46 +14,29 @@ const titleLines = [
   </em>,
 ];
 
-const PHOTO_ALT = "Dra. Bárbara Lopes, biomédica esteta e tricologista, sentada em uma poltrona clara no Instituto Bárbara Lopes";
-const DESKTOP_QUERY = "(min-width: 1024px)";
-const DESKTOP_SIZES = "(min-width: 1792px) 56vw, (min-width: 1280px) 60vw, 57vw";
+const PHOTO_ALT =
+  "Dra. Bárbara Lopes, biomédica esteta e tricologista, sorrindo na sala de espera do Instituto Bárbara Lopes, entre plantas e painéis de madeira";
 
-// Direção de arte: retrato vertical no mobile/tablet; fotografia horizontal no desktop.
-// Versões 4K obtidas por super-resolução (EDSR ×4) a partir dos originais da cliente: scripts/upscale-edsr.py
-const desktopPhoto = getImageProps({
-  src: "/assets/barbara/dra-barbara-lopes-4k.jpg",
+// Fotografia original da Dra. no Instituto (iPhone, 2880×3840). Um único arquivo para todas as telas,
+// com enquadramento próprio no mobile e no desktop (object-position).
+const photo = getImageProps({
+  src: "/assets/barbara/fotos/dra-barbara-lopes-hero.jpg",
   alt: PHOTO_ALT,
-  width: 3840,
-  height: 2161,
-  sizes: DESKTOP_SIZES,
-  quality: 90,
-}).props;
-const mobilePhoto = getImageProps({
-  src: "/assets/barbara/dra-barbara-lopes-retrato-4k.jpg",
-  alt: PHOTO_ALT,
-  width: 2560,
+  width: 2880,
   height: 3840,
-  sizes: "100vw",
+  sizes: "(min-width: 1792px) 56vw, (min-width: 1280px) 60vw, (min-width: 1024px) 57vw, 100vw",
   quality: 90,
   fetchPriority: "high",
   loading: "eager",
 }).props;
 
 export function Hero() {
-  // Cada viewport baixa apenas a sua versão (asset do LCP)
-  preload(mobilePhoto.src, {
+  // Asset do LCP
+  preload(photo.src, {
     as: "image",
-    imageSrcSet: mobilePhoto.srcSet,
-    imageSizes: mobilePhoto.sizes,
+    imageSrcSet: photo.srcSet,
+    imageSizes: photo.sizes,
     fetchPriority: "high",
-    media: "(max-width: 1023.98px)",
-  });
-  preload(desktopPhoto.src, {
-    as: "image",
-    imageSrcSet: desktopPhoto.srcSet,
-    imageSizes: desktopPhoto.sizes,
-    fetchPriority: "high",
-    media: DESKTOP_QUERY,
   });
 
   return (
@@ -62,17 +45,11 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative isolate bg-ivory pt-[var(--header-height)] lg:flex lg:min-h-[min(100svh,60rem)] lg:items-center lg:pt-[var(--header-height)]"
     >
-      {/* Fotografia original da Dra. Bárbara: no mobile é um bloco no topo; no desktop ocupa a metade direita */}
+      {/* Fotografia da Dra. Bárbara: no mobile é um bloco no topo; no desktop ocupa a metade direita */}
       <div className="relative h-[clamp(20rem,47svh,34rem)] overflow-hidden sm:h-[clamp(24rem,52svh,38rem)] lg:absolute lg:inset-y-0 lg:right-0 lg:top-[var(--header-height)] lg:h-auto lg:w-[57%] xl:w-[60%] 3xl:w-[56%]">
         <div className="hero-photo absolute inset-0 will-change-transform">
-          <picture>
-            <source media={DESKTOP_QUERY} srcSet={desktopPhoto.srcSet} sizes={desktopPhoto.sizes} />
-            {/* eslint-disable-next-line jsx-a11y/alt-text -- alt vem de getImageProps */}
-            <img
-              {...mobilePhoto}
-              className="absolute inset-0 size-full object-cover object-[50%_12%] lg:object-[60%_28%]"
-            />
-          </picture>
+          {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element -- otimizada e com alt via getImageProps */}
+          <img {...photo} className="absolute inset-0 size-full origin-[56%_38%] scale-[1.35] object-cover object-[50%_38%] sm:scale-[1.15] lg:scale-100 lg:object-[50%_46%]" />
         </div>
         {/* Transições suaves para o marfim (não alteram a fotografia, apenas a borda da composição) */}
         <div

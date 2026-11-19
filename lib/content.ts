@@ -15,13 +15,13 @@ export const nav = [
 ] as const;
 
 export const ctaLabels = {
-  primary: "Agendar minha avaliação",
-  header: "Agendar avaliação",
+  primary: "Agendar minha consulta",
+  header: "Agendar consulta",
   method: "Quero conhecer o Método Trico",
   technologies: "Quero entender meu caso",
-  conversation: "Conversar sobre uma avaliação",
+  conversation: "Conversar sobre uma consulta",
   consultation: "Agendar uma consulta",
-  about: "Agendar avaliação com a Dra. Bárbara",
+  about: "Agendar consulta com a Dra. Bárbara",
   results: "Quero começar meu tratamento",
   homecare: "Quero meu protocolo de home care",
   bridal: "Quero me preparar para o casamento",
@@ -43,7 +43,7 @@ export const hero = {
 
 export const concerns = {
   title: "Quando o cabelo muda, é importante compreender o que está acontecendo.",
-  text: "A queda capilar, o afinamento dos fios e as alterações do couro cabeludo podem envolver diferentes fatores. Por isso, uma avaliação individualizada é fundamental para compreender cada caso.",
+  text: "A queda capilar, o afinamento dos fios e as alterações do couro cabeludo podem envolver diferentes fatores. Por isso, uma consulta individualizada é fundamental para compreender cada caso.",
   items: [
     {
       number: "01",
@@ -61,7 +61,7 @@ export const concerns = {
       text: "Dúvidas sobre rotina, produtos e cuidados mais adequados às características do seu cabelo e do seu couro cabeludo.",
     },
   ],
-  note: "Essas situações podem ter origens diferentes. Somente uma avaliação profissional permite compreender cada caso.",
+  note: "Essas situações podem ter origens diferentes. Somente uma consulta profissional permite compreender cada caso.",
   closing: "Cada histórico é único. O cuidado também deve ser.",
 } as const;
 
@@ -69,19 +69,19 @@ export const method = {
   eyebrow: "O diferencial",
   title: "Método Trico",
   subtitle: "Um olhar integrativo para a saúde capilar.",
-  text: "Criado pela Dra. Bárbara Lopes a partir de anos de estudo e prática clínica, o Método Trico reúne avaliação individualizada, análise das particularidades do paciente, cuidado do couro cabeludo e acompanhamento profissional.",
+  text: "Criado pela Dra. Bárbara Lopes a partir de anos de estudo e prática clínica, o Método Trico reúne consulta individualizada, análise das particularidades do paciente, cuidado do couro cabeludo e acompanhamento profissional.",
   contrast:
     "O ponto de partida nunca é uma suplementação igual para todos. É a compreensão de quem você é, do seu histórico e do que o seu couro cabeludo apresenta.",
   steps: [
     {
       number: "01",
       title: "Compreender",
-      text: "Avaliação clínica, histórico individual e investigação das necessidades capilares.",
+      text: "Consulta clínica, histórico individual e investigação das necessidades capilares.",
     },
     {
       number: "02",
       title: "Investigar",
-      text: "Tricoscopia digital e avaliação de informações laboratoriais, conforme indicação e atribuições profissionais, para apoiar a compreensão de cada caso.",
+      text: "Tricoscopia digital e análise de informações laboratoriais, conforme indicação e atribuições profissionais, para apoiar a compreensão de cada caso.",
     },
     {
       number: "03",
@@ -91,20 +91,20 @@ export const method = {
     {
       number: "04",
       title: "Acompanhar",
-      text: "Reavaliações, acompanhamento da evolução e ajustes nas condutas conforme necessidade e resposta individual.",
+      text: "Consultas de retorno, acompanhamento da evolução e ajustes nas condutas conforme necessidade e resposta individual.",
     },
   ],
   closingLead: "Não existe uma única resposta para todos os cabelos.",
-  closingHighlight: "Existe uma avaliação para cada pessoa.",
+  closingHighlight: "Existe uma análise para cada pessoa.",
 } as const;
 
 export const results = {
   eyebrow: "Resultados em 90 dias",
-  text: "Com avaliação individualizada, plano de cuidado personalizado e acompanhamento próximo, o tratamento pelo Método Trico apresenta resultado expressivo em 90 dias na saúde do couro cabeludo e dos fios.",
+  text: "Com consulta individualizada, plano de cuidado personalizado e acompanhamento próximo, o tratamento pelo Método Trico apresenta resultado expressivo em 90 dias na saúde do couro cabeludo e dos fios.",
   milestones: [
     {
       day: "Dia 1",
-      title: "Avaliação",
+      title: "Consulta",
       text: "Tricoscopia digital, escuta do histórico e definição do seu plano de tratamento.",
     },
     {
@@ -114,7 +114,7 @@ export const results = {
     },
     {
       day: "60 dias",
-      title: "Reavaliação",
+      title: "Consulta de retorno",
       text: "Acompanhamento da evolução e ajustes de conduta conforme a resposta do seu organismo.",
     },
     {
@@ -143,7 +143,7 @@ export const homeCare = {
     {
       title: "Sob medida",
       subtitle: "Revisado a cada etapa",
-      text: "Produtos e orientações indicados para você, sem fórmula genérica, e ajustados a cada reavaliação.",
+      text: "Produtos e orientações indicados para você, sem fórmula genérica, e ajustados a cada consulta de retorno.",
     },
   ],
   quote: "O resultado do consultório se sustenta na rotina de casa.",
@@ -169,7 +169,6 @@ export const gallery = {
   tourAlt: "Tour em vídeo pela recepção e pelos ambientes do Instituto Bárbara Lopes",
   photos: [
     { src: "recepcao-vista", alt: "Recepção em madeira com janela panorâmica e vista para Araçatuba" },
-    { src: "poltrona-arco", alt: "Poltrona clara diante de parede curva com iluminação indireta e quadro em tons terrosos" },
     { src: "sala-de-espera", alt: "Sala de espera com poltronas em bouclê, piso de mármore e recepção ao fundo" },
     { src: "sala-de-atendimento", alt: "Sala de atendimento com maca, bancada e iluminação suave" },
     { src: "sala-de-espera-recepcao", alt: "Vista da sala de espera para a recepção e as janelas do Instituto" },
@@ -207,16 +206,16 @@ const PENDING_VALIDATION =
 
 const technologyCategories: TechnologyCategory[] = [
   {
-    id: "avaliacao",
+    id: "consulta",
     letter: "A",
-    title: "Avaliação e planejamento",
+    title: "Consulta e planejamento",
     intro:
-      "O couro cabeludo é uma extensão da pele e merece cuidados específicos. Por isso, a avaliação considera tanto os fios quanto a saúde do couro cabeludo.",
+      "O couro cabeludo é uma extensão da pele e merece cuidados específicos. Por isso, a consulta considera tanto os fios quanto a saúde do couro cabeludo.",
     icon: "scan",
     items: [
       {
         title: "Tricoscopia digital",
-        detail: "Observação ampliada do couro cabeludo e dos fios, que auxilia a avaliação e o registro do acompanhamento.",
+        detail: "Observação ampliada do couro cabeludo e dos fios, que auxilia a análise e o registro do acompanhamento.",
         publish: true,
       },
       {
@@ -238,7 +237,7 @@ const technologyCategories: TechnologyCategory[] = [
     letter: "B",
     title: "Tecnologias de consultório",
     intro:
-      "Recursos utilizados no consultório e selecionados individualmente, de acordo com a avaliação e a indicação para cada caso.",
+      "Recursos utilizados no consultório e selecionados individualmente, de acordo com a análise e a indicação para cada caso.",
     icon: "light",
     items: [
       {
@@ -256,7 +255,7 @@ const technologyCategories: TechnologyCategory[] = [
     letter: "C",
     title: "Procedimentos e recursos especializados",
     intro:
-      "Quando indicados na avaliação, recursos complementares podem ser discutidos individualmente com a profissional, sempre com explicação clara sobre possibilidades e limites.",
+      "Quando indicados na consulta, recursos complementares podem ser discutidos individualmente com a profissional, sempre com explicação clara sobre possibilidades e limites.",
     icon: "sparkle",
     emptyNote: "As opções são apresentadas individualmente, durante a consulta e conforme indicação.",
     items: [
@@ -282,9 +281,9 @@ const technologyCategories: TechnologyCategory[] = [
 export const technologies = {
   eyebrow: "Tecnologia aliada à individualização",
   title: "Ciência, tecnologia e cuidado em cada etapa.",
-  subtitle: "Recursos de avaliação e acompanhamento selecionados de acordo com as necessidades de cada paciente.",
+  subtitle: "Recursos de análise e acompanhamento selecionados de acordo com as necessidades de cada paciente.",
   disclaimer:
-    "A indicação de cada recurso é definida individualmente, após avaliação. Nenhum procedimento é indicado da mesma forma para todos os pacientes.",
+    "A indicação de cada recurso é definida individualmente, após a consulta. Nenhum procedimento é indicado da mesma forma para todos os pacientes.",
   categories: technologyCategories,
 } as const;
 
@@ -305,7 +304,7 @@ export const about = {
     "Há mais de sete anos, dedica sua atuação à saúde capilar e ao cuidado de pacientes com queixas relacionadas à queda e ao afinamento dos fios.",
     "Sua trajetória clínica teve início em um hospital de referência nacional em transplante capilar, onde participou do cuidado de pacientes em períodos pré e pós-operatórios.",
     "Atualmente, é docente da Academia Brasileira de Tricologia, ministra conteúdos para profissionais da área e participa de atividades de formação e atualização científica.",
-    "Criadora do Método Trico, desenvolveu uma abordagem que integra conhecimento clínico, cosmetologia, avaliação individualizada e acompanhamento da saúde capilar.",
+    "Criadora do Método Trico, desenvolveu uma abordagem que integra conhecimento clínico, cosmetologia, análise individualizada e acompanhamento da saúde capilar.",
   ],
   highlights: [
     "Especialização em Tricologia e Ciência Cosmética",
@@ -322,10 +321,10 @@ export const followUp = {
   title: "Cuidado contínuo. Decisões personalizadas.",
   text: "O acompanhamento clínico permite observar a evolução de cada paciente e ajustar as orientações e os recursos utilizados conforme as necessidades identificadas durante o processo.",
   items: [
-    { title: "Avaliação individual", text: "Escuta atenta da sua queixa, do seu histórico e da sua rotina." },
+    { title: "Consulta individual", text: "Escuta atenta da sua queixa, do seu histórico e da sua rotina." },
     { title: "Planejamento personalizado", text: "Condutas definidas a partir do que foi observado no seu caso." },
     { title: "Orientações de cuidado domiciliar", text: "Cuidados para a rotina em casa, quando indicados." },
-    { title: "Reavaliações e acompanhamento", text: "Observação da evolução e ajustes ao longo do processo." },
+    { title: "Consultas de retorno e acompanhamento", text: "Observação da evolução e ajustes ao longo do processo." },
   ],
   quote: "Cuidar do cabelo também é cuidar de como você se sente ao longo do caminho.",
 } as const;
@@ -336,9 +335,9 @@ export const faq = {
   items: [
     {
       id: "tipo-de-queda",
-      question: "A avaliação é indicada para qualquer tipo de queda capilar?",
+      question: "A consulta é indicada para qualquer tipo de queda capilar?",
       answer:
-        "A avaliação permite compreender o histórico individual e identificar possíveis necessidades de investigação e acompanhamento. A conduta adequada depende das características de cada caso.",
+        "A consulta permite compreender o histórico individual e identificar possíveis necessidades de investigação e acompanhamento. A conduta adequada depende das características de cada caso.",
     },
     {
       id: "formula-igual",
@@ -350,7 +349,7 @@ export const faq = {
       id: "exames",
       question: "Preciso realizar exames?",
       answer:
-        "A necessidade de exames ou avaliações complementares é considerada individualmente, de acordo com o histórico e as características apresentadas.",
+        "A necessidade de exames ou análises complementares é considerada individualmente, de acordo com o histórico e as características apresentadas.",
     },
     {
       id: "cuidados-em-casa",
@@ -368,11 +367,11 @@ export const faq = {
       id: "noivos",
       question: "Vou me casar. Quando devo começar o tratamento?",
       answer:
-        "O ideal é começar pelo menos 90 dias antes da data do casamento. Assim há tempo para avaliar, tratar e chegar ao grande dia com o couro cabeludo saudável e os fios no seu melhor momento. O tratamento é indicado para noivas e para noivos.",
+        "O ideal é começar pelo menos 90 dias antes da data do casamento. Assim há tempo para analisar, tratar e chegar ao grande dia com o couro cabeludo saudável e os fios no seu melhor momento. O tratamento é indicado para noivas e para noivos.",
     },
     {
       id: "agendamento",
-      question: "Como posso agendar uma avaliação?",
+      question: "Como posso agendar uma consulta?",
       answer:
         "O primeiro contato pode ser realizado pelo WhatsApp do Instituto, onde você poderá obter informações sobre atendimento e agendamento.",
     },

@@ -29,7 +29,7 @@ export const siteConfig = {
   tagline: "Tricologia avançada",
   title: "Instituto Bárbara Lopes | Tricologia Avançada em Araçatuba",
   description:
-    "Conheça o Método Trico da Dra. Bárbara Lopes: uma abordagem integrativa e individualizada para avaliação, cuidado e acompanhamento capilar em Araçatuba, SP.",
+    "Conheça o Método Trico da Dra. Bárbara Lopes: uma abordagem integrativa e individualizada para análise, cuidado e acompanhamento capilar em Araçatuba, SP.",
   locale: "pt_BR",
 
   professional: {
@@ -52,7 +52,7 @@ export const siteConfig = {
     /** WhatsApp oficial (+55 18 98827-0018). Pode ser substituído por NEXT_PUBLIC_WHATSAPP_NUMBER. */
     whatsapp: (env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER) ?? "5518988270018").replace(/\D/g, "") || null,
     whatsappMessage:
-      "Olá, Dra. Bárbara! Conheci o Instituto pelo site e gostaria de informações para agendar uma avaliação capilar.",
+      "Olá, Dra. Bárbara! Conheci o Instituto pelo site e gostaria de informações para agendar uma consulta capilar.",
     /** PENDENTE: perfil oficial ainda não fornecido. */
     instagram: env(process.env.NEXT_PUBLIC_INSTAGRAM_URL),
   },

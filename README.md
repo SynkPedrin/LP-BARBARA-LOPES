@@ -23,7 +23,7 @@ npm run lint
 npm run typecheck
 npm run remotion:studio  # abre o filme ClinicExperienceFilm no Remotion Studio
 npm run media:prepare    # regenera as mídias otimizadas a partir de /assets
-npm run media:photos     # fotos HEIC do iPhone → JPEG 4K (3840 px) sem metadados + tour em vídeo 4K/1080p (macOS)
+npm run media:photos     # fotos HEIC do iPhone → JPEG 4K (3840 px) sem metadados, imagem Open Graph e tour em vídeo 4K/1080p (macOS)
 ```
 
 ## Estrutura
@@ -48,9 +48,8 @@ public/assets/barbara/    mídias geradas por scripts/prepare-media.mjs
 
 `npm run media:prepare` usa o ffmpeg que acompanha o Remotion e:
 
-- copia a fotografia e a logo originais sem alteração;
+- copia a logo original sem alteração;
 - recorta a logo original (versão sem margens e monograma para o header e o favicon), sem redesenho;
-- gera a imagem Open Graph a partir da fotografia;
 - recodifica os 6 vídeos verticais (464 × 832) sem trilha de áudio e com faststart, sem upscale, e extrai os posters.
 
 ## Filme do consultório (Remotion)

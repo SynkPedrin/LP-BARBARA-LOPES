@@ -71,12 +71,12 @@ export function Bridal() {
             <span aria-hidden="true" className="absolute -inset-3 rounded-t-full border border-gold/50 sm:-inset-4" />
             <figure className="relative aspect-[3/4] overflow-hidden rounded-t-full bg-champagne" data-reveal="mask">
               <Image
-                src="/assets/barbara/fotos/dra-barbara-lopes-instituto.jpg"
-                alt="Dra. Bárbara Lopes sentada na sala de espera do Instituto, entre plantas e painéis de madeira"
+                src="/assets/barbara/fotos/poltrona-arco.jpg"
+                alt="Poltrona clara diante de parede curva com iluminação indireta e quadro em tons terrosos"
                 fill
                 quality={90}
                 sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw"
-                className="object-cover object-[50%_35%]"
+                className="object-cover object-[50%_60%]"
               />
             </figure>
             <p className="mt-8 text-center font-script text-[2.6rem] leading-none text-brown" aria-hidden="true">

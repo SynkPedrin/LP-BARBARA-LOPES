@@ -103,7 +103,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-6 pt-10 text-xs leading-relaxed text-champagne/55 lg:flex-row lg:items-start lg:justify-between">
           <p className="max-w-2xl">
-            As informações deste site têm caráter exclusivamente informativo e não substituem a avaliação profissional
+            As informações deste site têm caráter exclusivamente informativo e não substituem a consulta profissional
             individualizada. Condutas e recursos são indicados de acordo com cada caso, sem promessa de resultado.
             {professional.registration && (
               <>
