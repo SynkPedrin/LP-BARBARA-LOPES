@@ -8,18 +8,15 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "remotion:studio": "remotion studio remotion/index.ts",
     "media:prepare": "node scripts/prepare-media.mjs",
-    "media:photos": "node scripts/prepare-photos.mjs"
+    "media:photos": "node scripts/prepare-photos.mjs && node scripts/prepare-photo-variants.mjs"
   },
   "dependencies": {
-    "@remotion/player": "4.0.539",
     "lucide-react": "^1.65.0",
     "motion": "^14.9.0",
     "next": "^16.4.3",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1",
-    "remotion": "4.0.539"
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@remotion/cli": "4.0.539",
@@ -29,6 +26,7 @@
     "@types/react-dom": "^19.3.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.3",
+    "remotion": "4.0.539",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   }

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { GoldRule } from "@/components/ui/GoldRule";
+import { Photo } from "@/components/ui/Photo";
 import { RevealTitle } from "@/components/ui/RevealTitle";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { ctaLabels, homeCare } from "@/lib/content";
@@ -12,11 +12,10 @@ export function HomeCare() {
         <div className="order-2 lg:order-1 lg:col-span-5">
           <div className="relative mx-auto max-w-[30rem] lg:sticky lg:top-[calc(var(--header-height)+3rem)]">
             <figure className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-champagne shadow-[var(--shadow-lift)]" data-reveal="mask">
-              <Image
-                src="/assets/barbara/fotos/bancada-home-care.jpg"
+              <Photo
+                slug="bancada-home-care"
                 alt="Bancada da sala de atendimento com prateleiras douradas, certificados e produtos de cuidado capilar"
                 fill
-                quality={90}
                 sizes="(min-width: 1024px) 34vw, (min-width: 640px) 30rem, 90vw"
                 className="object-cover object-[50%_40%]"
               />

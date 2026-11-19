@@ -4,7 +4,6 @@ import { MobileCTABar } from "@/components/layout/MobileCTABar";
 import { AboutBarbara } from "@/components/sections/AboutBarbara";
 import { Bridal } from "@/components/sections/Bridal";
 import { ClinicalFollowUp } from "@/components/sections/ClinicalFollowUp";
-import { ClinicExperience } from "@/components/sections/ClinicExperience";
 import { Concerns } from "@/components/sections/Concerns";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
@@ -34,7 +33,6 @@ export default function Home() {
         <Technologies />
         <HomeCare />
         <Bridal />
-        <ClinicExperience />
         <Gallery />
         <AboutBarbara />
         <ClinicalFollowUp />

@@ -34,8 +34,6 @@ Variáveis de ambiente: ver `.env.example` (configurar também no painel da Verc
 - [ ] **Razão social / CNPJ** → `NEXT_PUBLIC_LEGAL_ENTITY` (rodapé).
 - [ ] **Ferramentas de análise** (opcionais): `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_GTM_ID`, `NEXT_PUBLIC_META_PIXEL_ID`.
       Só carregam após consentimento. Os eventos enviam apenas nome do evento e posição do CTA, nunca dados de saúde.
-- [ ] **Licença do Remotion**: gratuita para pessoas físicas e empresas com até 3 colaboradores; acima disso exige licença empresarial
-      (remotion.pro). Confirmar o enquadramento da empresa responsável pelo site.
 
 ## Presença digital
 

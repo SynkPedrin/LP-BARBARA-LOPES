@@ -1,20 +1,23 @@
 "use client";
 
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Maximize2, Pause, Play, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize, Maximize2, Pause, Play, X } from "lucide-react";
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Photo } from "@/components/ui/Photo";
 import { RevealTitle } from "@/components/ui/RevealTitle";
 import { trackEvent } from "@/lib/analytics";
 import { gallery } from "@/lib/content";
 
+const EASE = [0.22, 1, 0.36, 1] as const;
 const BASE = "/assets/barbara/fotos";
 const TOUR = {
-  uhd: `${BASE}/tour-instituto-4k.mp4`,
   hd: `${BASE}/tour-instituto-1080p.mp4`,
+  uhd: `${BASE}/tour-instituto-4k.mp4`,
   poster: `${BASE}/tour-instituto-poster.jpg`,
 };
 
 type NetworkInformation = { saveData?: boolean; effectiveType?: string };
+type GalleryPhoto = (typeof gallery.photos)[number];
 
 function prefersLightExperience() {
   const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
@@ -23,7 +26,10 @@ function prefersLightExperience() {
   return Boolean(slow || reduced);
 }
 
-/** Tour em vídeo: 4K em telas grandes, 1080p nas demais; só carrega perto da tela e pausa fora dela. */
+/**
+ * Tour em vídeo: 1080p na página (leve, sem travar a rolagem); em tela cheia, telas grandes recebem o 4K.
+ * Só carrega perto da tela e pausa fora dela.
+ */
 function TourVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -35,19 +41,39 @@ function TourVideo() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
-          if (!video.getAttribute("src")) {
-            const large = window.matchMedia("(min-width: 1280px)").matches && !light;
-            video.src = large ? TOUR.uhd : TOUR.hd;
-          }
+          if (!video.getAttribute("src")) video.src = TOUR.hd;
           if (!light) video.play().catch(() => undefined);
-        } else {
+        } else if (!document.fullscreenElement) {
           video.pause();
         }
       },
-      { rootMargin: "200px 0px", threshold: 0.25 },
+      { rootMargin: "300px 0px", threshold: 0.15 },
     );
     observer.observe(video);
-    return () => observer.disconnect();
+
+    const swap = (src: string) => {
+      if (video.getAttribute("src") === src) return;
+      const time = video.currentTime;
+      const resume = !video.paused;
+      video.src = src;
+      video.addEventListener(
+        "loadedmetadata",
+        () => {
+          video.currentTime = time;
+          if (resume) video.play().catch(() => undefined);
+        },
+        { once: true },
+      );
+    };
+    const onFullscreen = () => {
+      const large = window.screen.width * window.devicePixelRatio >= 2400;
+      swap(document.fullscreenElement === video && large ? TOUR.uhd : TOUR.hd);
+    };
+    document.addEventListener("fullscreenchange", onFullscreen);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("fullscreenchange", onFullscreen);
+    };
   }, []);
 
   const toggle = () => {
@@ -60,6 +86,15 @@ function TourVideo() {
     } else {
       video.pause();
     }
+  };
+
+  const fullscreen = () => {
+    const video = ref.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    if (!video) return;
+    if (!video.getAttribute("src")) video.src = TOUR.hd;
+    video.play().catch(() => undefined);
+    if (video.requestFullscreen) video.requestFullscreen().catch(() => undefined);
+    else video.webkitEnterFullscreen?.();
   };
 
   return (
@@ -80,28 +115,114 @@ function TourVideo() {
       <p className="absolute bottom-5 left-5 text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-ivory">
         Tour pelo Instituto
       </p>
+      <div className="absolute bottom-4 right-4 flex gap-2">
+        <button
+          type="button"
+          onClick={fullscreen}
+          className="grid size-11 place-items-center rounded-full bg-ivory/90 text-espresso backdrop-blur transition hover:bg-ivory"
+          aria-label="Assistir ao tour em tela cheia"
+        >
+          <Maximize className="size-4" strokeWidth={1.5} />
+        </button>
+        <button
+          type="button"
+          onClick={toggle}
+          className="grid size-11 place-items-center rounded-full bg-ivory/90 text-espresso backdrop-blur transition hover:bg-ivory"
+          aria-label={playing ? "Pausar o tour em vídeo" : "Reproduzir o tour em vídeo"}
+        >
+          {playing ? <Pause className="size-4" strokeWidth={1.5} /> : <Play className="size-4 translate-x-px" strokeWidth={1.5} />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** Foto da galeria: revelada por máscara ao entrar na tela, com leve zoom de saída. */
+function GalleryTile({ photo, index, onOpen }: { photo: GalleryPhoto; index: number; onOpen: (index: number) => void }) {
+  return (
+    <m.li
+      initial={{ opacity: 0, y: 48, clipPath: "inset(14% 0% 0% 0%)" }}
+      whileInView={{ opacity: 1, y: 0, clipPath: "inset(0% 0% 0% 0%)" }}
+      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
+      transition={{ duration: 1.1, ease: EASE }}
+    >
       <button
         type="button"
-        onClick={toggle}
-        className="absolute bottom-4 right-4 grid size-11 place-items-center rounded-full bg-ivory/90 text-espresso backdrop-blur transition hover:bg-ivory"
-        aria-label={playing ? "Pausar o tour em vídeo" : "Reproduzir o tour em vídeo"}
+        onClick={() => onOpen(index)}
+        className="group relative block aspect-[3/4] w-full overflow-hidden rounded-[4px] bg-sand"
+        aria-label={`Ampliar foto: ${photo.alt}`}
       >
-        {playing ? <Pause className="size-4" strokeWidth={1.5} /> : <Play className="size-4 translate-x-px" strokeWidth={1.5} />}
+        <m.span
+          className="absolute inset-0 block"
+          initial={{ scale: 1.14 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, ease: EASE }}
+        >
+          <Photo
+            slug={photo.src}
+            alt={photo.alt}
+            fill
+            sizes="(min-width: 1024px) 22vw, 48vw"
+            className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
+          />
+        </m.span>
+        <span
+          aria-hidden="true"
+          className="absolute right-3 top-3 grid size-8 place-items-center rounded-full bg-ivory/85 text-espresso opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+        >
+          <Maximize2 className="size-3.5" strokeWidth={1.5} />
+        </span>
       </button>
+    </m.li>
+  );
+}
+
+/** Colunas com velocidades diferentes conforme a rolagem (paralaxe). */
+function ParallaxColumns({
+  columns,
+  speeds,
+  progress,
+  onOpen,
+  className,
+}: {
+  columns: number;
+  speeds: [number, number][];
+  progress: MotionValue<number>;
+  onOpen: (index: number) => void;
+  className: string;
+}) {
+  const reduced = useReducedMotion();
+  const ys = [
+    useTransform(progress, [0, 1], speeds[0] ?? [0, 0]),
+    useTransform(progress, [0, 1], speeds[1] ?? [0, 0]),
+    useTransform(progress, [0, 1], speeds[2] ?? [0, 0]),
+  ];
+  return (
+    <div className={className}>
+      {Array.from({ length: columns }, (_, col) => (
+        <m.ul key={col} style={reduced ? undefined : { y: ys[col] }} className="flex flex-col gap-3 sm:gap-4 lg:gap-5">
+          {gallery.photos.map((photo, index) =>
+            index % columns === col ? <GalleryTile key={photo.src} photo={photo} index={index} onOpen={onOpen} /> : null,
+          )}
+        </m.ul>
+      ))}
     </div>
   );
 }
 
 export function Gallery() {
+  const gridRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState<number | null>(null);
   const total = gallery.photos.length;
+  const { scrollYProgress } = useScroll({ target: gridRef, offset: ["start end", "end start"] });
 
-  const open = (i: number) => {
+  const open = useCallback((i: number) => {
     setIndex(i);
     dialogRef.current?.showModal();
     trackEvent("gallery_open", { item_id: gallery.photos[i]?.src });
-  };
+  }, []);
   const close = () => dialogRef.current?.close();
   const step = useCallback((delta: number) => setIndex((i) => (i === null ? i : (i + delta + total) % total)), [total]);
 
@@ -119,11 +240,12 @@ export function Gallery() {
   const current = index === null ? undefined : gallery.photos[index];
 
   return (
-    <section id="galeria" aria-labelledby="gallery-title" className="relative bg-white py-24 sm:py-28 lg:py-36">
+    <section id="galeria" aria-labelledby="gallery-title" className="relative overflow-clip bg-white py-24 sm:py-28 lg:py-36">
       <div className="container-editorial">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-taupe" data-reveal="fade">
+            <p className="eyebrow flex items-center gap-3 text-taupe" data-reveal="fade">
+              <span aria-hidden="true" className="h-px w-8 bg-gold" />
               {gallery.eyebrow}
             </p>
             <RevealTitle
@@ -145,49 +267,38 @@ export function Gallery() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-8">
+        <div ref={gridRef} className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
             <div className="mx-auto max-w-[24rem] lg:sticky lg:top-[calc(var(--header-height)+2rem)] lg:max-w-none" data-reveal="fade">
               <TourVideo />
             </div>
           </div>
 
-          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:col-span-8 lg:grid-cols-3 lg:gap-5 lg:pb-12">
-            {gallery.photos.map((photo, i) => (
-              <li
-                key={photo.src}
-                className={i % 3 === 1 ? "lg:translate-y-12" : undefined}
-                data-reveal
-                style={{ "--reveal-delay": (i % 3) * 90 } as React.CSSProperties}
-              >
-                <button
-                  type="button"
-                  onClick={() => open(i)}
-                  className="group relative block aspect-[3/4] w-full overflow-hidden rounded-[4px] bg-sand"
-                  aria-label={`Ampliar foto: ${photo.alt}`}
-                >
-                  <Image
-                    src={`${BASE}/${photo.src}.jpg`}
-                    alt={photo.alt}
-                    fill
-                    quality={90}
-                    sizes="(min-width: 1024px) 22vw, 48vw"
-                    className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-editorial)] group-hover:scale-[1.04]"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute right-3 top-3 grid size-8 place-items-center rounded-full bg-ivory/85 text-espresso opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
-                  >
-                    <Maximize2 className="size-3.5" strokeWidth={1.5} />
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
+          <ParallaxColumns
+            columns={2}
+            speeds={[
+              [30, -30],
+              [90, -60],
+            ]}
+            progress={scrollYProgress}
+            onOpen={open}
+            className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden"
+          />
+          <ParallaxColumns
+            columns={3}
+            speeds={[
+              [0, -50],
+              [90, -90],
+              [40, -70],
+            ]}
+            progress={scrollYProgress}
+            onOpen={open}
+            className="hidden grid-cols-3 gap-5 lg:col-span-8 lg:grid lg:pb-16"
+          />
         </div>
       </div>
 
-      {/* Ampliação em tela cheia (fotos em até 4K) */}
+      {/* Ampliação em tela cheia (fotos em até 2880 px) */}
       <dialog
         ref={dialogRef}
         onClose={() => setIndex(null)}
@@ -211,15 +322,7 @@ export function Gallery() {
               </button>
             </div>
             <figure className="relative mx-4 flex-1 sm:mx-20" onClick={(event) => event.target === event.currentTarget && close()}>
-              <Image
-                key={current.src}
-                src={`${BASE}/${current.src}.jpg`}
-                alt={current.alt}
-                fill
-                quality={90}
-                sizes="100vw"
-                className="object-contain"
-              />
+              <Photo key={current.src} slug={current.src} alt={current.alt} fill sizes="100vw" className="object-contain" />
             </figure>
             <p className="px-6 py-5 text-center text-sm text-champagne/75">{current.alt}</p>
             <button

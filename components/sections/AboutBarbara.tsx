@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { GoldRule } from "@/components/ui/GoldRule";
+import { Photo } from "@/components/ui/Photo";
 import { RevealTitle } from "@/components/ui/RevealTitle";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { about, ctaLabels } from "@/lib/content";
@@ -16,11 +16,10 @@ export function AboutBarbara() {
           <div className="relative mx-auto max-w-[30rem] lg:sticky lg:top-[calc(var(--header-height)+3rem)]">
             <span aria-hidden="true" className="absolute -inset-3 rounded-t-full border border-gold/50 sm:-inset-4" />
             <figure className="relative aspect-[4/5] overflow-hidden rounded-t-full bg-champagne" data-reveal="mask">
-              <Image
-                src="/assets/barbara/fotos/dra-barbara-lopes-jaleco.jpg"
+              <Photo
+                slug="dra-barbara-lopes-jaleco"
                 alt="Retrato da Dra. Bárbara Lopes, de jaleco branco, em seu consultório"
                 fill
-                quality={90}
                 sizes="(min-width: 1024px) 34vw, (min-width: 640px) 30rem, 90vw"
                 className="object-cover object-[50%_22%]"
               />

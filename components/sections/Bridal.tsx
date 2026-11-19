@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import { RevealTitle } from "@/components/ui/RevealTitle";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { bridal, ctaLabels } from "@/lib/content";
@@ -70,11 +70,10 @@ export function Bridal() {
           <div className="relative mx-auto max-w-[28rem]">
             <span aria-hidden="true" className="absolute -inset-3 rounded-t-full border border-gold/50 sm:-inset-4" />
             <figure className="relative aspect-[3/4] overflow-hidden rounded-t-full bg-champagne" data-reveal="mask">
-              <Image
-                src="/assets/barbara/fotos/poltrona-arco.jpg"
+              <Photo
+                slug="poltrona-arco"
                 alt="Poltrona clara diante de parede curva com iluminação indireta e quadro em tons terrosos"
                 fill
-                quality={90}
                 sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw"
                 className="object-cover object-[50%_60%]"
               />

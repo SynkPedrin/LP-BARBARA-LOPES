@@ -9,8 +9,8 @@ export const nav = [
   { label: "Método Trico", href: "#metodo-trico" },
   { label: "Tecnologias", href: "#tecnologias" },
   { label: "Noivos", href: "#noivos" },
+  { label: "Galeria", href: "#galeria" },
   { label: "Sobre a Dra.", href: "#sobre" },
-  { label: "Nosso Espaço", href: "#espaco" },
   { label: "Contato", href: "#contato" },
 ] as const;
 
@@ -285,13 +285,6 @@ export const technologies = {
   disclaimer:
     "A indicação de cada recurso é definida individualmente, após a consulta. Nenhum procedimento é indicado da mesma forma para todos os pacientes.",
   categories: technologyCategories,
-} as const;
-
-export const experience = {
-  eyebrow: "Nosso espaço",
-  title: "Um espaço pensado para acolher você.",
-  text: "Arquitetura, tranquilidade e atenção aos detalhes em um ambiente preparado para oferecer uma experiência de atendimento acolhedora e individualizada.",
-  chapters: ["Natureza", "Arquitetura", "Identidade", "Acolhimento", "Luz", "Araçatuba"],
 } as const;
 
 export const about = {

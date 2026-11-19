@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Photo } from "@/components/ui/Photo";
 import { RevealTitle } from "@/components/ui/RevealTitle";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
 import { ctaLabels, results } from "@/lib/content";
@@ -45,11 +45,10 @@ export function Results90() {
           <div className="relative mx-auto max-w-[24rem] lg:max-w-none">
             <span aria-hidden="true" className="absolute -inset-3 rounded-[6px] border border-gold/30 sm:-inset-4" />
             <figure className="relative aspect-[3/4] overflow-hidden rounded-[4px] bg-espresso-deep" data-reveal="mask">
-              <Image
-                src="/assets/barbara/fotos/dra-barbara-lopes-sorriso.jpg"
+              <Photo
+                slug="dra-barbara-lopes-sorriso"
                 alt="Dra. Bárbara Lopes sorrindo, de jaleco branco, no Instituto Bárbara Lopes"
                 fill
-                quality={90}
                 sizes="(min-width: 1024px) 30vw, (min-width: 640px) 24rem, 90vw"
                 className="object-cover object-[50%_30%]"
               />

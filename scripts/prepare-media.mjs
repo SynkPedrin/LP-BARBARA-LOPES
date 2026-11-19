@@ -29,26 +29,8 @@ ffmpeg(["-i", logo, "-vf", "crop=760:760:254:60,scale=180:180:flags=lanczos", "a
 
 // A imagem de compartilhamento (Open Graph) é gerada em scripts/prepare-photos.mjs, a partir da foto do hero.
 
-// Vídeos verticais (464×832): sem trilha de áudio, faststart, sem upscale.
-const videos = [
-  ["VIDEO1.mp4", "clinica-vegetacao"],
-  ["VIDEO6.mp4", "clinica-ambiente"],
-  ["VIDEO 4.mp4", "clinica-identidade"],
-  ["VIDEO3.mp4", "clinica-cafe"],
-  ["VIDEO5.mp4", "clinica-arquitetura"],
-  ["VIDEO2.mp4", "clinica-vista"],
-];
-
-for (const [file, slug] of videos) {
-  const input = join(SRC, file);
-  if (!existsSync(input)) throw new Error(`Vídeo ausente: ${input}`);
-  ffmpeg([
-    "-i", input,
-    "-an",
-    "-c:v", "libx264", "-preset", "slow", "-crf", "23",
-    "-pix_fmt", "yuv420p", "-movflags", "+faststart",
-    join(VIDEO_OUT, `${slug}.mp4`),
-  ]);
-  ffmpeg(["-ss", "1.2", "-i", input, "-frames:v", "1", "-q:v", "3", join(VIDEO_OUT, `${slug}.jpg`)]);
-  console.log(`✓ ${file} → ${slug}`);
-}
+// Imagem da vista (seção Localização): quadro extraído do vídeo original da cliente.
+const vista = join(SRC, "VIDEO2.mp4");
+if (!existsSync(vista)) throw new Error(`Vídeo ausente: ${vista}`);
+ffmpeg(["-ss", "1.2", "-i", vista, "-frames:v", "1", "-q:v", "3", join(VIDEO_OUT, "clinica-vista.jpg")]);
+console.log("✓ VIDEO2.mp4 → clinica-vista.jpg");

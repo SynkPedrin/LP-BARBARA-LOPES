@@ -2,6 +2,8 @@ import { getImageProps } from "next/image";
 import { MapPin } from "lucide-react";
 import { preload } from "react-dom";
 import { WhatsAppCTA } from "@/components/ui/WhatsAppCTA";
+import { photoLoader } from "@/lib/photo-loader";
+import { photoManifest } from "@/lib/photo-manifest";
 import { ctaLabels, hero } from "@/lib/content";
 
 const titleLines = [
@@ -17,15 +19,17 @@ const titleLines = [
 const PHOTO_ALT =
   "Dra. Bárbara Lopes, biomédica esteta e tricologista, sorrindo na sala de espera do Instituto Bárbara Lopes, entre plantas e painéis de madeira";
 
-// Fotografia original da Dra. no Instituto (iPhone, 2880×3840). Um único arquivo para todas as telas,
+// Fotografia original da Dra. no Instituto (iPhone, 2880×3840), servida pelas variantes WebP estáticas. Um único arquivo para todas as telas,
 // com enquadramento próprio no mobile e no desktop (object-position).
+const HERO_BLUR = photoManifest["dra-barbara-lopes-hero"]?.blur ?? "";
+
 const photo = getImageProps({
   src: "/assets/barbara/fotos/dra-barbara-lopes-hero.jpg",
   alt: PHOTO_ALT,
   width: 2880,
   height: 3840,
   sizes: "(min-width: 1792px) 56vw, (min-width: 1280px) 60vw, (min-width: 1024px) 57vw, 100vw",
-  quality: 90,
+  loader: photoLoader,
   fetchPriority: "high",
   loading: "eager",
 }).props;
@@ -49,7 +53,11 @@ export function Hero() {
       <div className="relative h-[clamp(20rem,47svh,34rem)] overflow-hidden sm:h-[clamp(24rem,52svh,38rem)] lg:absolute lg:inset-y-0 lg:right-0 lg:top-[var(--header-height)] lg:h-auto lg:w-[57%] xl:w-[60%] 3xl:w-[56%]">
         <div className="hero-photo absolute inset-0 will-change-transform">
           {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element -- otimizada e com alt via getImageProps */}
-          <img {...photo} className="absolute inset-0 size-full origin-[56%_38%] scale-[1.35] object-cover object-[50%_38%] sm:scale-[1.15] lg:scale-100 lg:object-[50%_46%]" />
+          <img
+            {...photo}
+            style={{ backgroundImage: `url(${HERO_BLUR})`, backgroundSize: "cover", backgroundPosition: "50% 42%" }}
+            className="absolute inset-0 size-full origin-[56%_38%] scale-[1.35] object-cover object-[50%_38%] sm:scale-[1.15] lg:scale-100 lg:object-[50%_46%]"
+          />
         </div>
         {/* Transições suaves para o marfim (não alteram a fotografia, apenas a borda da composição) */}
         <div
